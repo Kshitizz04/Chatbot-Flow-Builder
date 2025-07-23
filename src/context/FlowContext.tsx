@@ -4,14 +4,14 @@ import React, { createContext, useContext, useState, type ReactNode } from 'reac
 // Only Id of the selected node needs to be centralized for now, as other things like coordinates are needed only in the canvas component
 // This can be extended later if more state management is needed
 interface FlowContextProps {
-	selectedNodeId: string;
+	selectedNodeId: string | null;
 	setSelectedNodeId: (id: string) => void;
 }
 
 const FlowContext = createContext<FlowContextProps | undefined>(undefined);
 
 export const FlowProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-	const [selectedNodeId, setSelectedNodeId] = useState<string>('default-id');
+	const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
 
 	return (
 		<FlowContext.Provider value={{ selectedNodeId, setSelectedNodeId }}>

@@ -7,7 +7,6 @@ const App: React.FC = () => {
 	return (
 		<ReactFlowProvider>
 			<FlowProvider>
-				<h1 className="text-center text-2xl font-bold my-4">Chatbot Flow Builder</h1>
 				<MainPage/>
 			</FlowProvider>
 		</ReactFlowProvider>

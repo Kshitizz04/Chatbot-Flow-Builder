@@ -10,7 +10,7 @@ const NodesPanel = () => {
         <div className="p-4 border-r border-gray-300">
             <h3 className="font-bold mb-2">Nodes</h3>
             <div
-                onDragStart={(e) => onDragStart(e, "textNode")}
+                onDragStart={(e) => onDragStart(e, "text")}
                 draggable
                 className="p-2 border rounded-md bg-white cursor-grab shadow-sm"
             >

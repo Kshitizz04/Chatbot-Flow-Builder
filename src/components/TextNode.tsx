@@ -7,7 +7,9 @@ interface TextNodeProps {
 
 const TextNode: React.FC<TextNodeProps> = ({ data }) => {
     return (
-        <div className="bg-gray-100 border border-gray-400 rounded-md p-2 min-w-[150px]">
+        <div
+            className="bg-gray-100 border border-gray-400 rounded-md p-2 min-w-[150px] overflow-visible relative"
+        >
             <p>{data.label}</p>
             <Handle type="source" position={Position.Right} id="source" />
             <Handle type="target" position={Position.Left} id="target" />
