@@ -48,7 +48,7 @@ const MainPage: React.FC = () => {
                     <Canvas />
                 </div>
                 <div className="w-1/4">
-                    {selectedNodeId ? <SettingsPanel /> : <NodesPanel />}
+                    {!selectedNodeId ? <SettingsPanel /> : <NodesPanel />}
                 </div>
             </div>
         </div>
