@@ -1,11 +1,8 @@
-// src/components/FlowCanvas.tsx
 import React, { useCallback } from "react";
-import "reactflow/dist/style.css";
 import { useFlowContext } from "../context/FlowContext";
 import {
     addEdge,
     ReactFlow,
-    ReactFlowProvider,
     useEdgesState,
     useNodesState,
     type Connection,
@@ -65,18 +62,16 @@ const Canvas = () => {
 
     return (
         <div className="flex-1 h-full" onDrop={onDrop} onDragOver={onDragOver}>
-            <ReactFlowProvider>
-                <ReactFlow
-                    nodes={nodes}
-                    edges={edges}
-                    onNodesChange={onNodesChange}
-                    onEdgesChange={onEdgesChange}
-                    onConnect={onConnect}
-                    nodeTypes={nodeTypes}
-                    onNodeClick={(_, node) => setSelectedNodeId(node.id)}
-                    fitView
-                />
-            </ReactFlowProvider>
+            <ReactFlow
+                nodes={nodes}
+                edges={edges}
+                onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
+                onConnect={onConnect}
+                nodeTypes={nodeTypes}
+                onNodeClick={(_, node) => setSelectedNodeId(node.id)}
+                fitView
+            />
         </div>
     );
 };
