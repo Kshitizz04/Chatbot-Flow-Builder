@@ -3,6 +3,7 @@ import { useFlowContext } from "../context/FlowContext";
 import {
     addEdge,
     Controls,
+    MarkerType,
     MiniMap,
     ReactFlow,
     useEdgesState,
@@ -21,11 +22,14 @@ const Canvas = () => {
 
     const onConnect = useCallback(
         (connection: Connection) => {
-            const existingEdge = edges.find(
-                (e) => e.source === connection.source && e.sourceHandle === connection.sourceHandle
+            const hasOutgoing = edges.some(
+                (e) =>
+                    e.source === connection.source &&
+                    (e.sourceHandle ?? null) === (connection.sourceHandle ?? null)
             );
-            if (existingEdge) {
-                alert("Each source can only have one outgoing edge");
+            if (hasOutgoing) {
+                // some error message can be shown here to let user know about the rules
+                // i dont think we need to
                 return;
             }
             setEdges((eds) => addEdge(connection, eds));
@@ -75,6 +79,7 @@ const Canvas = () => {
                 onNodeClick={(_, node) => setSelectedNodeId(node.id)}
                 onPaneClick={() => setSelectedNodeId(null)}
                 fitView
+                defaultEdgeOptions={{ markerEnd: { type: MarkerType.ArrowClosed } }}
             >
                 <MiniMap
                     nodeStrokeColor={(n) => {
