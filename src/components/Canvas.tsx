@@ -78,7 +78,7 @@ const Canvas = () => {
             >
                 <MiniMap
                     nodeStrokeColor={(n) => {
-                        if (n.type === 'text') return '#0041d0';
+                        if (n.type === 'Text') return 'var(--color-on-tertiary)';
                         else return '#ff0072';
                     }}
                     nodeColor={(n) => {
