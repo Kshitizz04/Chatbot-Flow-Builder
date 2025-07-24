@@ -2,6 +2,8 @@ import React, { useCallback } from "react";
 import { useFlowContext } from "../context/FlowContext";
 import {
     addEdge,
+    Controls,
+    MiniMap,
     ReactFlow,
     useEdgesState,
     useNodesState,
@@ -9,6 +11,7 @@ import {
     type Edge,
     type Node
 } from "@xyflow/react";
+import '@xyflow/react/dist/style.css';
 import { nodeTypes } from "../types/reactflowNodeTypes";
 
 const Canvas = () => {
@@ -70,8 +73,21 @@ const Canvas = () => {
                 onConnect={onConnect}
                 nodeTypes={nodeTypes}
                 onNodeClick={(_, node) => setSelectedNodeId(node.id)}
+                onPaneClick={() => setSelectedNodeId(null)}
                 fitView
-            />
+            >
+                <MiniMap
+                    nodeStrokeColor={(n) => {
+                        if (n.type === 'text') return '#0041d0';
+                        else return '#ff0072';
+                    }}
+                    nodeColor={(n) => {
+                        if (n.type === 'text') return '#fff';
+                        return '#fff';
+                    }}
+                />
+                <Controls/>
+            </ReactFlow>
         </div>
     );
 };

@@ -5,7 +5,7 @@ import React, { createContext, useContext, useState, type ReactNode } from 'reac
 // This can be extended later if more state management is needed
 interface FlowContextProps {
 	selectedNodeId: string | null;
-	setSelectedNodeId: (id: string) => void;
+	setSelectedNodeId: (id: string | null) => void;
 }
 
 const FlowContext = createContext<FlowContextProps | undefined>(undefined);
