@@ -1,4 +1,5 @@
 import React from "react";
+import { BsChatText } from "react-icons/bs";
 
 const NodesPanel = () => {
     const onDragStart = (event: React.DragEvent, nodeType: string) => {
@@ -7,14 +8,14 @@ const NodesPanel = () => {
     };
 
     return (
-        <div className="p-4 border-r border-gray-300">
-            <h3 className="font-bold mb-2">Nodes</h3>
+        <div className="p-3 grid grid-cols-2 gap-2">
             <div
-                onDragStart={(e) => onDragStart(e, "text")}
+                onDragStart={(e) => onDragStart(e, "Text")}
                 draggable
-                className="p-2 border rounded-md bg-white cursor-grab shadow-sm"
+                className="p-2 cursor-grab flex flex-col items-center justify-center text-accent border border-accent rounded-md"
             >
-                Text Node
+                <BsChatText className="text-2xl" />
+                <p className="font-semibold">Message</p>
             </div>
         </div>
     );

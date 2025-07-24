@@ -26,19 +26,19 @@ const MainPage: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-screen w-screen">
-            <div className="flex justify-end items-center p-4 bg-gray-200">
-                <div className="flex w-full items-center justify-center">
-                    <div className="bg-red-500 text-white p-2 rounded-md">
-                        Alert
+        <div className="flex flex-col h-screen w-screen bg-surface">
+            <div className="flex justify-end items-center py-4 bg-container text-on-container font-bold">
+                <div className="flex flex-1 items-center justify-center">
+                    <div className="bg-error text-on-error py-2 px-4 rounded-md">
+                        Cannot Save Flow
                     </div>
                 </div>
-                <div className="w-96 flex items-center justify-center">
+                <div className="w-1/4 flex items-center justify-center">
                     <button
-                        className="p-2 bg-blue-500 text-white rounded-md"
+                        className="py-2 px-4 border border-accent text-accent rounded-md"
                         onClick={handleSave}
                     >
-                        Save Flow
+                        Save Changes
                     </button>
                 </div>
             </div>
@@ -47,7 +47,7 @@ const MainPage: React.FC = () => {
                 <div className="flex-1">
                     <Canvas />
                 </div>
-                <div className="w-1/4">
+                <div className="w-1/4 border border-outline">
                     {selectedNodeId ? <SettingsPanel /> : <NodesPanel />}
                 </div>
             </div>
