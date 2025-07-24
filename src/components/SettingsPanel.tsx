@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFlowContext } from "../context/FlowContext";
-import { useReactFlow } from "@xyflow/react";
+import { useReactFlow, type Node } from "@xyflow/react";
 import { MdArrowBack, MdDelete } from "react-icons/md";
 
 const SettingsPanel: React.FC = () => {
     const { selectedNodeId, setSelectedNodeId } = useFlowContext();
+    const [dataValue, setDataValue] = useState("");
     const { getNodes, setNodes, getEdges, setEdges } = useReactFlow();
+    let node: Node | null = getNodes().find((n) => n.id === selectedNodeId) || null;
 
-    const node = getNodes().find((n) => n.id === selectedNodeId);
-
-    if (!node) return <p className="p-4">Select a node to</p>;
+    useEffect(()=>{
+        const currentNode = getNodes().find((n) => n.id === selectedNodeId);
+        if (currentNode) {
+            setDataValue(currentNode.data.label as string);
+            node = currentNode;
+        }
+    }, [selectedNodeId]);
 
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const updatedNodes = getNodes().map((n) =>
-            n.id === selectedNodeId ? { ...n, data: { ...n.data, label: e.target.value } } : n
+        setDataValue(e.target.value);
+        setNodes(nds =>
+            nds.map(n =>
+                n.id === selectedNodeId
+                    ? { ...n, data: { ...n.data, label: e.target.value } }
+                    : n
+            )
         );
-        setNodes(updatedNodes);
     };
 
     const onBack = () => {
@@ -42,12 +52,12 @@ const SettingsPanel: React.FC = () => {
             </div>
 
             <div className="w-full p-3 border-b border-outline">
-                <p className="text-sm text-gray-500 mb-2">{node.type}</p>
+                <p className="text-sm text-gray-500 mb-2">{node?.type}</p>
                 <textarea
-                    value={typeof node.data.label === "string" ? node.data.label : ""}
+                    value={dataValue as string}
                     onChange={(e) => onChange(e)}
                     placeholder="Type your message here..."
-                    className="w-full p-2 border border-outline rounded"  
+                    className="w-full p-2 border border-outline rounded scrollbar-none"  
                 />
             </div>
 

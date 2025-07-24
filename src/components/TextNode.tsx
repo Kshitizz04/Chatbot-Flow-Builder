@@ -27,8 +27,8 @@ const TextNode = ({ data, id }: TextNodeProps) => {
                 </div>
                 <RiWhatsappFill className="text-lg bg-white p-[2px] rounded-full aspect-square text-green-500" />
             </div>
-            <div className="flex-1 min-h-0 overflow-y-auto p-2">
-                <p className="text-xs">{data.label}</p>
+            <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar p-2 w-full">
+                <p className="text-xs break-words">{data.label}</p>
             </div>
             <Handle
                 type="source"
