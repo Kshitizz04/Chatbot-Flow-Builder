@@ -1,69 +1,50 @@
-# React + TypeScript + Vite
+# Chatbot Flow Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Repo:** [https://github.com/Kshitizz04/Chatbot-Flow-Builder](https://github.com/Kshitizz04/Chatbot-Flow-Builder)  
+**Live Demo:** [will update after hosting]()
 
-Currently, two official plugins are available:
+A simple extensible chatbot flow builder built with React, TypeScript, and [React Flow](https://reactflow.dev/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Packages Used
 
-## Expanding the ESLint configuration
+- [React Flow](https://reactflow.dev/) — interactive flow builder
+- [Tailwind CSS](https://tailwindcss.com/) — utility-first CSS framework for styling
+- [React Icons](https://react-icons.github.io/react-icons/) — icon library for UI elements
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Drag and drop nodes to build your chatbot flow.
+- Only one type of node supported currently ("Message"), but easily extensible.
+- Connect nodes with edges.
+- Source handles allow only one outgoing edge.
+- Target handles allow multiple incoming edges.
+- Settings panel to edit node content.
+- Save button validates the flow and shows error/success messages.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Architecture
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **App Structure:**  
+  The app uses React functional components and Context API for state management.  
+  - `App.tsx`: Root component, sets up providers.
+  - `MainPage.tsx`: Layout and main logic, including save validation and panel switching.
+  - `Canvas.tsx`: Renders the flow builder using React Flow, manages nodes and edges.
+  - `NodesPanel.tsx`: Displays available node types for drag-and-drop, easily extensible via a config array.
+  - `SettingsPanel.tsx`: Allows editing of selected node's content and node deletion.
+  - `FlowContext.tsx`: Centralizes the selected node state.
+  - `reactflowNodeTypes.ts`: Maps node type strings to React components for extensibility.
+
+- **Extending Node Types:**  
+  To add new node types, update the `NODE_TYPES` array in `src/components/NodesPanel.tsx` and add the corresponding React component to `src/types/reactflowNodeTypes.ts`.
+
+- **Styling:**  
+  Tailwind CSS is used for rapid UI development and theming.  
+  Custom colors and themes are defined in `index.css`.
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
