@@ -3,13 +3,24 @@ import { useFlowContext } from "../context/FlowContext";
 import { useReactFlow, type Node } from "@xyflow/react";
 import { MdArrowBack, MdDelete } from "react-icons/md";
 
+/**
+ - Shows a text area to edit the label/content of the selected node.
+ - Allows deleting the selected node (and its connected edges).
+ - Allows going back to the NodesPanel by deselecting the node.
+ */
+
 const SettingsPanel: React.FC = () => {
     const { selectedNodeId, setSelectedNodeId } = useFlowContext();
+    // value of the text area, using generic term since future node types might have different data structures
     const [dataValue, setDataValue] = useState("");
     const { getNodes, setNodes, getEdges, setEdges } = useReactFlow();
+
+    // in canvas.tsx, we set the selectedNodeId in the context when a node is clicked
+    // get the selected node from the nodes list
     let node: Node | null = getNodes().find((n) => n.id === selectedNodeId) || null;
 
     useEffect(()=>{
+        // this is used to get the value of selected node into the text area by updating the dataValue state
         const currentNode = getNodes().find((n) => n.id === selectedNodeId);
         if (currentNode) {
             setDataValue(currentNode.data.label as string);
@@ -18,6 +29,7 @@ const SettingsPanel: React.FC = () => {
     }, [selectedNodeId]);
 
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        // when textarea value changes, update the dataValue state and data inside the node
         setDataValue(e.target.value);
         setNodes(nds =>
             nds.map(n =>
@@ -28,10 +40,12 @@ const SettingsPanel: React.FC = () => {
         );
     };
 
+    // deselect the node when going back
     const onBack = () => {
         setSelectedNodeId(null);
     };
 
+    // delete the selected node and its connected edges by filtering them out
     const onDelete = () => {
         setNodes(getNodes().filter(n => n.id !== selectedNodeId));
         setEdges(getEdges().filter(e => e.source !== selectedNodeId && e.target !== selectedNodeId));
@@ -41,6 +55,7 @@ const SettingsPanel: React.FC = () => {
     return (
         <div className="w-full h-full flex flex-col justify-start">
 
+            {/* header with back button and title */}
             <div className="w-full p-3 relative border-b border-outline">
                 <p className="font-semibold text-center">Message</p>
                 <button
@@ -51,6 +66,7 @@ const SettingsPanel: React.FC = () => {
                 </button>
             </div>
 
+            {/* text area for editing the node's data */}
             <div className="w-full p-3 border-b border-outline">
                 <p className="text-sm text-gray-500 mb-2">{node?.type}</p>
                 <textarea
@@ -61,6 +77,7 @@ const SettingsPanel: React.FC = () => {
                 />
             </div>
 
+            {/* delete button at the bottom */}
             <div className="w-full p-3 mt-auto">
                 <button
                     onClick={onDelete}

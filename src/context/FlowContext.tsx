@@ -1,7 +1,7 @@
 // since the app is small, ill just use context API instead of redux/zustand or other state management libraries
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
 
-// Only Id of the selected node needs to be centralized for now, as other things like coordinates are needed only in the canvas component
+// Only Id of the selected node needs to be centralized for now
 // This can be extended later if more state management is needed
 interface FlowContextProps {
 	selectedNodeId: string | null;

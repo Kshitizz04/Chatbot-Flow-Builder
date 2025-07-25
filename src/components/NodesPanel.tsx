@@ -1,7 +1,7 @@
 import React from "react";
 import { BsChatText } from "react-icons/bs";
 
-// making an array for each node type, so in future we can new node types here and the rendering logic will remain the same
+// making an array for each node type, so in future we can add new node types here and the rendering logic will remain the same
 const NODE_TYPES = [
     {
         type: "Text",

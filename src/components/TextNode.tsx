@@ -8,11 +8,16 @@ interface TextNodeProps {
     id?: string;
 }
 
+// UI for out custom text node
+
 const TextNode = ({ data, id }: TextNodeProps) => {
     const { selectedNodeId } = useFlowContext();
     const isSelected = id === selectedNodeId;
+    // will use this isSelected value to highlight the node when it is selected
+
     return (
         <div className={`w-64 h-24 bg-gray-100 shadow-md shadow-outline rounded-md flex flex-col ${isSelected ? 'border border-accent' : ''}`}>
+
             <Handle
                 type="target"
                 position={Position.Left}
@@ -20,6 +25,8 @@ const TextNode = ({ data, id }: TextNodeProps) => {
                 isConnectable={true}
                 style={{ width: 10, height: 10, border: '2px solid #ffffff', backgroundColor: isSelected ? 'var(--color-accent)' : '' }}
             />
+
+            {/* green color header with fixed height */}
             <div className="w-full flex justify-between items-center rounded-t-md bg-tertiary text-on-tertiary p-2 text-center">
                 <div className="flex items-center gap-2">
                     <BiMessageRoundedDetail className="text-md" />
@@ -27,9 +34,12 @@ const TextNode = ({ data, id }: TextNodeProps) => {
                 </div>
                 <RiWhatsappFill className="text-lg bg-white p-[2px] rounded-full aspect-square text-green-500" />
             </div>
+
+            {/* text display, keeping the scrollbar visible here so users can click to scroll,  because reactflow zooms in/out when we try to scroll here */}
             <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar p-2 w-full">
                 <p className="text-xs break-words">{data.label}</p>
             </div>
+
             <Handle
                 type="source"
                 position={Position.Right}
