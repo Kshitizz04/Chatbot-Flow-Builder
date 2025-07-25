@@ -32,7 +32,7 @@ import { nodeTypes } from "../types/reactflowNodeTypes";
  - MiniMap and Controls props: Provide additional UI features for navigation and overview.
  */
 
-const Canvas = () => {
+const Canvas = ({ onInit }: { onInit?: (instance: any) => void }) => {
     const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
     const { setSelectedNodeId } = useFlowContext();
@@ -108,6 +108,7 @@ const Canvas = () => {
                 onPaneClick={() => setSelectedNodeId(null)}
                 fitView
                 defaultEdgeOptions={{ markerEnd: { type: MarkerType.ArrowClosed } }}
+                onInit={onInit}
             >
                 <MiniMap
                     nodeStrokeColor={(n) => {
