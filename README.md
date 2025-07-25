@@ -1,7 +1,7 @@
 # Chatbot Flow Builder
 
 **Repo:** [https://github.com/Kshitizz04/Chatbot-Flow-Builder](https://github.com/Kshitizz04/Chatbot-Flow-Builder)  
-**Live Demo:** [will update after hosting]()
+**Live Demo:** [https://chatbot-flow-builder-orpin.vercel.app/](https://chatbot-flow-builder-orpin.vercel.app/)
 
 A simple extensible chatbot flow builder built with React, TypeScript, and [React Flow](https://reactflow.dev/).
 
